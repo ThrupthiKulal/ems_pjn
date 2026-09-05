@@ -1,0 +1,144 @@
+.admin-register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  padding: 30px 20px;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.admin-register-card {
+  width: 100%;
+  max-width: 760px;
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  padding: 32px 28px;
+  box-sizing: border-box;
+}
+
+.admin-register-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.admin-register-header h1 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.admin-register-header p {
+  margin-top: 10px;
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.admin-register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-form-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.admin-form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #f8fafc;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.admin-form-group input::placeholder {
+  color: #64748b;
+}
+
+.admin-form-group input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.error-message {
+  margin: 0;
+  color: #ef4444;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.admin-register-button {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-register-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
+}
+
+.admin-login-link {
+  text-align: center;
+  margin-top: 20px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.admin-login-link a {
+  text-decoration: none;
+  color: #a78bfa;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.admin-login-link a:hover {
+  color: #ddd6fe;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .admin-register-card {
+    padding: 24px 18px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-register-header h1 {
+    font-size: 1.8rem;
+  }
+}

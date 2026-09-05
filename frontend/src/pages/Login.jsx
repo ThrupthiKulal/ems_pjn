@@ -1,0 +1,81 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './Login.css';
+
+function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.username.trim() || !formData.password.trim()) {
+      alert('Please enter both username and password.');
+      return;
+    }
+
+    localStorage.setItem('loggedInUser', formData.username);
+    navigate('/user-dashboard');
+  };
+
+  return (
+    <div className="login-page">
+      <div className="login-card">
+        <div className="login-header">
+          <h1>Welcome Back</h1>
+          <p>Login to your Employee Management System account</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your username"
+              value={formData.username}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className="login-button">
+            Login
+          </button>
+        </form>
+
+        <p className="register-link">
+          Don&apos;t have an account? <Link to="/register">Register</Link>
+        </p>
+        <p className="admin-link">
+          Are you an administrator? <Link to="/admin-login">Admin Access</Link>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default Login;
