@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import api from "../api/axiosConfig";
 import "./Register.css";
 
 function Register() {
@@ -29,7 +30,7 @@ function Register() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.password || !formData.confirmPassword) {
@@ -43,8 +44,23 @@ function Register() {
     }
 
     setPasswordError("");
-    console.log("Registration Data:", formData);
-    navigate("/login");
+    
+    try {
+      const payload = {
+        name: formData.fullName,
+        email: formData.email,
+        phone: formData.phoneNumber,
+        department: formData.department,
+        position: "Employee"
+      };
+      
+      await api.post('/employees', payload);
+      console.log("Registration successful");
+      navigate("/login");
+    } catch (error) {
+      console.error("Error during registration:", error);
+      setPasswordError("Failed to register. Please try again.");
+    }
   };
 
   return (

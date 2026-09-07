@@ -21,7 +21,7 @@ function AdminLogin() {
       return;
     }
     console.log('Admin Login Data:', formData);
-    navigate('/admin-dashboard');
+    navigate('/admin-dashboard', { replace: true });
   };
 
   return (

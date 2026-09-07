@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import api from '../api/axiosConfig';
 import './Login.css';
 
 function Login() {
@@ -17,7 +18,7 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.username.trim() || !formData.password.trim()) {
@@ -25,8 +26,26 @@ function Login() {
       return;
     }
 
-    localStorage.setItem('loggedInUser', formData.username);
-    navigate('/user-dashboard');
+    try {
+      const response = await api.get('/employees');
+      const employees = response.data;
+      
+      const matchedEmployee = employees.find(
+        emp => emp.name.toLowerCase() === formData.username.toLowerCase() || 
+               emp.email.toLowerCase() === formData.username.toLowerCase()
+      );
+
+      if (matchedEmployee) {
+        localStorage.setItem('loggedInUser', matchedEmployee.name);
+        localStorage.setItem('loggedInUserId', matchedEmployee.id);
+        navigate('/user-dashboard', { replace: true });
+      } else {
+        alert('Invalid credentials. (Note: Login using your registered Full Name or Email)');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Failed to connect to the server.');
+    }
   };
 
   return (
