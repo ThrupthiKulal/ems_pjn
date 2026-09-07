@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Column;
 import java.time.LocalDate;
 
 @Entity
@@ -41,11 +43,26 @@ public class Task {
         ASSIGNED, COMPLETED
     }
 
+    public enum ReviewStatus {
+        PENDING, APPROVED, REJECTED
+    }
+
     @Enumerated(EnumType.STRING)
     private TaskPriority priority;
 
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private ReviewStatus reviewStatus;
+
+    private String rejectionReason;
+
+    @Lob
+    @Column(columnDefinition="LONGTEXT")
+    private String screenshotBase64;
+
+    private LocalDate submissionDate;
 
     public Task() {
     }
@@ -131,5 +148,37 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public ReviewStatus getReviewStatus() {
+        return reviewStatus;
+    }
+
+    public void setReviewStatus(ReviewStatus reviewStatus) {
+        this.reviewStatus = reviewStatus;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+
+    public String getScreenshotBase64() {
+        return screenshotBase64;
+    }
+
+    public void setScreenshotBase64(String screenshotBase64) {
+        this.screenshotBase64 = screenshotBase64;
+    }
+
+    public LocalDate getSubmissionDate() {
+        return submissionDate;
+    }
+
+    public void setSubmissionDate(LocalDate submissionDate) {
+        this.submissionDate = submissionDate;
     }
 }
